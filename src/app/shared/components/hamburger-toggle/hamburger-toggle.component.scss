@@ -1,0 +1,50 @@
+@import '../../../../styles/variables';
+@import '../../../../styles/mixins';
+
+.mobile-menu-toggle {
+  @include position(fixed, null, 1.5rem, 1.5rem, null);
+  @include size(48px, 48px);
+  border: none;
+  border-radius: $radius-full;
+  background: $gray-400;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: $z-index-fixed;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+
+  @include respond(mobile) {
+    @include flex(column, center, center);
+    display: flex;
+    gap: 6px;
+  }
+
+  &:hover {
+    background: $gray-300;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  span {
+    @include size(24px, 3px);
+    background-color: $white;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform-origin: center;
+  }
+
+  &.sidebar-open {
+    span:nth-child(1) {
+      transform: rotate(45deg) translate(5px,6px);
+    }
+    span:nth-child(2) {
+      opacity: 0;
+    }
+    span:nth-child(3) {
+      transform: rotate(-45deg) translate(5px, -9px);
+    }
+  }
+}

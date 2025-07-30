@@ -1,0 +1,24 @@
+<div class="stat-card" [class.loading]="loading">
+  <div class="stat-content">
+    <div class="stat-label">{{ label }}</div>
+
+    <div class="stat-value" *ngIf="!loading">{{ value }}</div>
+    <div class="stat-skeleton" *ngIf="loading"></div>
+
+    <div class="stat-trend" *ngIf="trend && !loading" [class]="'trend-' + trendDirection">
+      <svg *ngIf="trendDirection === 'up'" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+        <polyline points="17 6 23 6 23 12"></polyline>
+      </svg>
+
+      <svg *ngIf="trendDirection === 'down'" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="23 18 13.5 8.5 8.5 13.5 1 6"></polyline>
+        <polyline points="17 18 23 18 23 12"></polyline>
+      </svg>
+
+      <span>{{ trend }}</span>
+    </div>
+  </div>
+
+  <div class="stat-decoration"></div>
+</div>
