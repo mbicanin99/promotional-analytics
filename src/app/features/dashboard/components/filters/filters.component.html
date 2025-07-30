@@ -1,0 +1,141 @@
+<div class="filters-card">
+  <div class="filters-header">
+    <h2 class="filters-title">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"></polygon>
+      </svg>
+      Filters
+    </h2>
+    <button
+      class="clear-filters-btn"
+      (click)="clearAllFilters()"
+      *ngIf="activeFilters().length > 0">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+      Clear All
+    </button>
+  </div>
+
+  <div class="filters-grid">
+    <div class="filter-group">
+      <label class="filter-label">Brand</label>
+      <select
+        class="filter-control"
+        [ngModel]="filters().brand"
+        (ngModelChange)="salesService.setFilter('brand', $event)">
+        <option [value]="null">All Brands</option>
+        <option *ngFor="let brand of salesService.filteredBrands()" [value]="brand">
+          {{ brand }}
+        </option>
+      </select>
+    </div>
+
+
+    <div class="filter-group">
+      <label class="filter-label">Category</label>
+      <select
+        class="filter-control"
+        [ngModel]="filters().category"
+        (ngModelChange)="salesService.setFilter('category', $event)">
+        <option [value]="null">All Categories</option>
+        <option *ngFor="let category of salesService.filteredCategories()" [value]="category">
+          {{ category }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Subcategory</label>
+      <select
+        class="filter-control"
+        [ngModel]="filters().subcategory"
+        (ngModelChange)="salesService.setFilter('subcategory', $event)"
+        [disabled]="!filters().brand || !filters().category">
+        <option [value]="null">All Subcategories</option>
+        <option *ngFor="let subcat of salesService.subcategories()" [value]="subcat">
+          {{ subcat }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Product</label>
+      <select
+        class="filter-control"
+        [ngModel]="filters().product"
+        (ngModelChange)="salesService.setFilter('product', $event)"
+        [disabled]="!filters().brand || !filters().category || !filters().subcategory">
+        <option [value]="null">All Products</option>
+        <option *ngFor="let product of salesService.productNames()" [value]="product">
+          {{ product }}
+        </option>
+      </select>
+    </div>
+
+
+
+    <div class="filter-group">
+      <label class="filter-label">Retailer</label>
+      <select
+        class="filter-control"
+        [ngModel]="filters().retailer"
+        (ngModelChange)="salesService.setFilter('retailer', $event)">
+        <option [value]="null">All Retailers</option>
+        <option *ngFor="let retailer of retailers()" [value]="retailer">
+          {{ retailer }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Store</label>
+      <select
+        class="filter-control"
+        [ngModel]="filters().store"
+        (ngModelChange)="salesService.setFilter('store', $event)"
+        [disabled]="getFilteredStores().length === 0">
+        <option [value]="null">All Stores</option>
+        <option *ngFor="let store of getFilteredStores()" [value]="store.id">
+          {{ store.name }}
+        </option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">Start Date</label>
+      <input
+        type="date"
+        class="filter-control"
+        [ngModel]="filters().dateRange.start"
+        (ngModelChange)="updateDateRange($event, 'start')">
+    </div>
+
+    <div class="filter-group">
+      <label class="filter-label">End Date</label>
+      <input
+        type="date"
+        class="filter-control"
+        [ngModel]="filters().dateRange.end"
+        (ngModelChange)="updateDateRange($event, 'end')"
+        [min]="filters().dateRange.start || ''">
+    </div>
+  </div>
+
+  <div class="active-filters" *ngIf="activeFilters().length > 0">
+    <span class="active-filters-label">Active filters:</span>
+    <div class="filter-tags">
+      <div class="filter-tag" *ngFor="let filter of activeFilters()">
+        <span class="filter-tag-type">{{ filter.type }}:</span>
+        <span class="filter-tag-value">{{ filter.value }}</span>
+        <button
+          class="filter-tag-remove"
+          (click)="removeFilter(filter.type)"
+          title="Remove filter">
+          ×
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.sidebar {
+  @include flexColumn;
+  @include position(fixed, $top: $navbar-height, $left: 0);
+  @include size($sidebar-width, 100%);
+  background: $white;
+  box-shadow: 1px 0 4px rgba(0, 0, 0, 0.05);
+  transition: transform $transition-slow;
+  z-index: $z-index-sticky;
+
+  @include respond(mobile) {
+    transform: translateX(-100%);
+
+    &.sidebar-open {
+      transform: translateX(0);
+    }
+  }
+}

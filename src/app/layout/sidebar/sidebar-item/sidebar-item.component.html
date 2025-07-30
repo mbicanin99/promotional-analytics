@@ -1,0 +1,16 @@
+<a
+  *ngIf="route; else noRoute"
+  [routerLink]="route"
+  routerLinkActive="active"
+  class="sidebar-item"
+>
+  <img *ngIf="icon" [src]="icon" alt="{{ label }}" class="item-icon" />
+  <span class="item-label">{{ label }}</span>
+</a>
+
+<ng-template #noRoute>
+  <div class="sidebar-item">
+    <img *ngIf="icon" [src]="icon" alt="{{ label }}" class="item-icon" />
+    <span class="item-label">{{ label }}</span>
+  </div>
+</ng-template>

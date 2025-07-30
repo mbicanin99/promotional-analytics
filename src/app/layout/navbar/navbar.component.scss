@@ -1,0 +1,90 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.navbar {
+  @include position(fixed, 0, 0, unset, 0);
+  @include flexBetween;
+  @include size(100%, $navbar-height);
+  padding: 0 $spacing-lg;
+  background: $white;
+  border-bottom: 1px solid $gray-300;
+  z-index: $z-index-fixed;
+
+  .navbar-brand {
+    @include flex(row, flex-start, center);
+    gap: $spacing-md;
+
+    .brand-logo {
+      @include size(40px);
+      border-radius: $radius-md;
+      background-color: $gray-100;
+      padding: $spacing-xs;
+      object-fit: contain;
+    }
+
+    .brand-text {
+      @include font($font-size-xl, $font-weight-semibold);
+      color: $text-primary;
+
+      @include respond(mobile) {
+        display: none;
+      }
+    }
+  }
+
+  .navbar-actions {
+    @include flex(row, flex-end, center);
+    gap: $spacing-md;
+
+    .icon-button {
+      @include easeInAnimation;
+      border: none;
+      border-radius: $radius-md;
+      background: transparent;
+      cursor: pointer;
+      padding: $spacing-sm;
+
+      svg {
+        stroke: $text-primary;
+      }
+
+      &:hover {
+        background: $gray-100;
+      }
+    }
+
+    .user-menu {
+      @include flex(row, flex-start, center);
+      @include easeInAnimation;
+      gap: $spacing-xs;
+      border-radius: $radius-full;
+      background: $gray-200;
+      padding: $spacing-xs $spacing-sm;
+      cursor: pointer;
+
+      .user-avatar {
+        @include size(32px);
+        border-radius: 50%;
+        border: 1px solid $gray-400;
+        object-fit: cover;
+      }
+
+      .user-name {
+        @include font($font-size-sm, $font-weight-medium);
+        color: $text-primary;
+
+        @include respond(mobile) {
+          display: none;
+        }
+      }
+
+      &:hover {
+        background: $gray-300;
+      }
+    }
+  }
+
+  @include respond(mobile) {
+    padding: 0 $spacing-md;
+  }
+}

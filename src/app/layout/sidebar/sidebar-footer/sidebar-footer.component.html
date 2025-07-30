@@ -1,0 +1,9 @@
+<div class="sidebar-footer">
+  <nav class="nav-items">
+    <app-sidebar-item
+      *ngFor="let item of navFooterSections"
+      [label]="item.title"
+      [icon]="item.icon">
+    </app-sidebar-item>
+  </nav>
+</div>

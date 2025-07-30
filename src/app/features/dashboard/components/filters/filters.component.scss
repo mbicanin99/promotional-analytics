@@ -1,0 +1,134 @@
+@import '../../../../../styles/variables';
+@import '../../../../../styles/mixins';
+@import '../../../../../styles/buttons';
+
+.filters-card {
+  @include flexColumn;
+  @include card;
+  gap: $spacing-lg;
+
+  .filters-header {
+    @include flexBetween;
+
+    .filters-title {
+      @include flex(row, flex-start, center);
+      @include font($font-size-lg, $font-weight-semibold);
+      gap: $spacing-sm;
+      color: $text-primary;
+
+      svg {
+        color: $primary-color;
+      }
+    }
+
+    .clear-filters-btn {
+      @include button-secondary;
+      @include flex(row, center, center);
+      gap: $spacing-xs;
+
+      svg {
+        @include size(16px);
+      }
+    }
+  }
+
+  .filters-grid {
+    @include grid(auto-fit, $spacing-md);
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    @include respond(mobile) {
+      grid-template-columns: 1fr;
+    }
+
+    .filter-group {
+      @include flexColumn;
+      gap: $spacing-sm;
+
+      .filter-label {
+        @include font($font-size-sm, $font-weight-medium);
+        color: $text-primary;
+      }
+
+      .filter-control {
+        @include form-control;
+
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+
+        &.ng-invalid.ng-touched {
+          border-color: $danger-color;
+        }
+      }
+
+      select.filter-control {
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%234a5568' d='M10.293 3.293L6 7.586 1.707 3.293A1 1 0 00.293 4.707l5 5a1 1 0 001.414 0l5-5a1 1 0 10-1.414-1.414z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        padding-right: 36px;
+      }
+    }
+  }
+
+  .active-filters {
+    @include flexColumn;
+    gap: $spacing-md;
+    padding-top: $spacing-md;
+    border-top: 1px solid $gray-200;
+
+    .active-filters-label {
+      @include font($font-size-sm);
+      color: $text-secondary;
+    }
+
+    .filter-tags {
+      @include flexWrap;
+      gap: $spacing-sm;
+
+      .filter-tag {
+        @include flex(row, flex-start, center);
+        @include font($font-size-sm, $font-weight-normal);
+        @include easeInAnimation;
+        gap: $spacing-xs;
+        padding: $spacing-xs $spacing-sm;
+        background: $gray-100;
+        border-radius: $radius-full;
+
+        &:hover {
+          background: $gray-200;
+        }
+
+        .filter-tag-type {
+          color: $text-secondary;
+          font-weight: $font-weight-normal;
+        }
+
+        .filter-tag-value {
+          color: $text-primary;
+          font-weight: $font-weight-medium;
+        }
+
+        .filter-tag-remove {
+          @include flexCenter;
+          @include size(20px);
+          @include easeInAnimation;
+          @include font($font-size-xl, $font-weight-normal, 1);
+          color: $text-secondary;
+          border: none;
+          border-radius: $radius-full;
+          background: transparent;
+          margin-left: $spacing-xs;
+          cursor: pointer;
+
+          &:hover {
+            color: $white;
+            background: $danger-color;
+            transform: scale(1.1);
+          }
+        }
+      }
+    }
+  }
+}

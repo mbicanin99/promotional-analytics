@@ -1,0 +1,13 @@
+<div class="app-container">
+  <app-navbar></app-navbar>
+  <app-sidebar [isOpen]="isSidebarOpen"></app-sidebar>
+
+  <main class="main-content" [class.sidebar-collapsed]="!isSidebarOpen">
+    <router-outlet></router-outlet>
+  </main>
+
+  <app-hamburger-toggle
+    [isOpen]="isSidebarOpen"
+    (toggle)="toggleSidebar()">
+  </app-hamburger-toggle>
+</div>

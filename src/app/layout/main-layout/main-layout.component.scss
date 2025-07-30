@@ -1,0 +1,30 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.app-container {
+  @include flexRow;
+  @include position($position: relative);
+  min-height: 100vh;
+  background-color: $bg-primary;
+
+  .main-content {
+    width: calc(100% - #{$sidebar-width});
+    min-height: calc(100vh - #{$navbar-height});
+    margin-left: $sidebar-width;
+    margin-top: $navbar-height;
+    padding: $spacing-xl;
+    transition: margin-left $transition-slow, width $transition-slow;
+
+    @include respond(mobile) {
+      width: 100%;
+      margin-left: 0;
+      padding: $spacing-lg;
+    }
+
+    &.sidebar-collapsed {
+      width: 100%;
+      margin-left: 0;
+    }
+  }
+}
+

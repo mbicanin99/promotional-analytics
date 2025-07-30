@@ -1,0 +1,13 @@
+<div class="sidebar-content">
+  <div class="sidebar-section" *ngFor="let section of navSections">
+    <h3 class="sidebar-title">{{ section.title }}</h3>
+    <nav class="nav-items">
+      <app-sidebar-item
+        *ngFor="let item of section.items"
+        [label]="item.label"
+        [icon]="item.icon"
+        [route]="item.route">
+      </app-sidebar-item>
+    </nav>
+  </div>
+</div>
