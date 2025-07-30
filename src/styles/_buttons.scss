@@ -1,0 +1,68 @@
+@import 'variables';
+@import 'mixins';
+
+@mixin button-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: $spacing-sm $spacing-md;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  outline: none;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.2);
+  }
+}
+
+@mixin button-primary {
+  @include button-base;
+  background: $blue-purple;
+  color: $white;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.3);
+  }
+}
+
+@mixin button-secondary {
+  @include button-base;
+  background: $gray-200;
+  color: $gray-700;
+
+  &:hover:not(:disabled) {
+    background: $gray-300;
+    transform: translateY(-1px);
+  }
+}
+
+.icon-button {
+  @include flex(row, center, center);
+  @include size($width: 40px, $height: 40px);
+  @include easeInAnimation;
+  border: none;
+  background: rgba($white, 0.1);
+  border-radius: $radius-md;
+  color: $white;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba($white, 0.2);
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}

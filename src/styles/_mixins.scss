@@ -1,0 +1,234 @@
+@import '../styles/variables';
+
+@mixin flex ($direction: row, $justify: unset, $align: unset, $wrap: unset) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  flex-wrap: $wrap;
+}
+
+@mixin position ($position: relative, $top: unset, $right: unset, $bottom: unset, $left: unset) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin size ($width: auto, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin font ($font-size, $font-weight: 400, $line-height: normal, $letter-spacing: normal, $font-style: normal, $text-decoration: none) {
+  font-size: $font-size;
+  font-weight: $font-weight;
+  line-height: $line-height;
+  letter-spacing: $letter-spacing;
+  font-style: $font-style;
+  text-decoration: $text-decoration;
+}
+
+@mixin flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+@mixin flexColumn {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin flexWrap {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@mixin flexCenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+@mixin flexBetween {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+// ANIMATION
+@mixin easeInAnimation {
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all .2s ease;
+}
+
+// RESIZE
+@mixin respond($breakpoint) {
+  @if $breakpoint==small-mobile {
+    @media only screen and (max-width: 20em) {
+      @content
+    }
+
+  ; // 320px
+  }
+
+  @if $breakpoint==mobile {
+    @media only screen and (max-width: 37.95em) {
+      @content
+    }
+
+  ; // ~607px
+  }
+
+  @if $breakpoint==tablet-portrait {
+    @media only screen and (max-width: 56.25em) {
+      @content
+    }
+
+  ; // 900px
+  }
+
+  @if $breakpoint==tablet-landscape {
+    @media only screen and (max-width: 75em) {
+      @content
+    }
+
+  ; // 1200px
+  }
+
+  @if $breakpoint==big-desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content
+    }
+
+  ; // 1800px
+  }
+
+  @if $breakpoint==tablet-and-desktop {
+    @media only screen and (min-width: 37.5em) {
+      @content
+    }
+
+  ; // Bigger then 600px
+  }
+
+  @if $breakpoint==large-screen {
+    @media only screen and (min-width: 56.25em) {
+      @content
+    }
+
+  ; // Bigger then 900px
+  }
+
+  @if $breakpoint==large-screen-landscape {
+    @media only screen and (min-width: 75em) {
+      @content
+    }
+
+  ; // Bigger then 1200px
+  }
+
+  @else {
+    @media only screen and (max-width: $breakpoint) {
+      @content
+    }
+
+  ; // custom breakpoint
+  }
+}
+
+@mixin scrollbar($overflow-x: hidden, $overflow-y: auto) {
+  overflow-x: $overflow-x;
+  overflow-y: $overflow-y;
+
+  // WebKit (Chrome, Edge, Safari)
+  // Styles scrollbar base container (container includes track and thumb)
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  // Styles track (background area where the thumb moves)
+  &::-webkit-scrollbar-track {
+    border-radius: 25px;
+  }
+
+  // Styles thumb (draggable part of scrollbar)
+  &::-webkit-scrollbar-thumb {
+    background-color: $white;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    background-clip: padding-box;
+  }
+
+  // Firefox
+  scrollbar-width: thin;
+  scrollbar-color: #EAEAEA transparent;
+}
+
+// Card styles
+@mixin card {
+  background: $bg-card;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  padding: $spacing-lg;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-lg;
+  }
+}
+
+// Form controls
+@mixin form-control {
+  width: 100%;
+  padding: 10px 14px;
+  border: 2px solid $gray-300;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  transition: all $transition-base;
+  background: $white;
+  outline: none;
+
+  &:hover {
+    border-color: $gray-400;
+  }
+
+  &:focus {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 3px rgba($primary-color, 0.1);
+  }
+
+  &:disabled {
+    background: $gray-100;
+    cursor: not-allowed;
+  }
+}
+
+// Text truncation
+@mixin text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Grid
+@mixin grid($columns: 12, $gap: $spacing-md) {
+  display: grid;
+  grid-template-columns: repeat($columns, 1fr);
+  gap: $gap;
+}
+
+@mixin spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
